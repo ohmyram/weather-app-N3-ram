@@ -71,7 +71,7 @@ function WeatherCard({ weatherData, toggleModal }) {
 
                 <div className="w-full h-2/6 relative">
                     <figure className="w-full h-full opacity-20">
-                        <img src="/public/Cloud-background.png" alt="Cloud Background" className="w-full h-full object-cover" />
+                        <img src="/Cloud-background.png" alt="Cloud Background" className="w-full h-full object-cover" />
                     </figure>
                     <figure className="w-28 absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 z-50">
                         <img src={`/public/${weatherData && weatherData.list && weatherData.list.length > 0 && weatherData.list[0].weather[0].icon}.png`} alt="" />
