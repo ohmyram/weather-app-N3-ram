@@ -4,7 +4,7 @@ const WeatherContext = createContext();
 
 const WeatherProvider = ({ children }) => {
     const [weatherData, setWeatherData] = useState(null);
-    const [location, setLocation] = useState({ lat: 44.34, lon: 10.99 });
+    const [location, setLocation] = useState(null); // cambio el valor a null
     const [city, setCity] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -29,7 +29,7 @@ const WeatherProvider = ({ children }) => {
 
     const fetchCityName = async (lat, lon) => {
         try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=4fb1791439bb5c0532cd93dd0cf907b2`);
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4fb1791439bb5c0532cd93dd0cf907b2`);
             const data = await response.json();
             setCity(data.name);
         } catch (error) {
@@ -55,30 +55,18 @@ const WeatherProvider = ({ children }) => {
         }
     };
 
-    const searchLocation = (ubicacion) => {
-        fetch(``)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.coord) {
-                    setLocation({ lat: data.coord.lat, lon: data.coord.lon });
-                } else {
-                    console.error('Location not found');
-                }
-            })
-            .catch((error) => {
-                console.error('Error searching location:', error);
-            });
-    };
-
-    const kelvinToCelsius = (kelvin) => (kelvin - 273.15).toFixed(2);
-    const kelvinToFahrenheit = (kelvin) => ((kelvin - 273.15) * 9 / 5 + 32).toFixed(2);
+    useEffect(() => {
+        getLocation(); // Llama a getLocation para obtener la ubicación actual
+    }, []); // El segundo argumento asegura que useEffect solo se ejecute una vez al inicio
 
 
 
     useEffect(() => {
-        fetchWeather(location.lat, location.lon);
-        fetchCityName(location.lat, location.lon);
-    }, [location]);
+        if (location) { // Verifica que location tenga un valor antes de llamar a fetchWeather y fetchCityName
+            fetchWeather(location.lat, location.lon);
+            fetchCityName(location.lat, location.lon);
+        }
+    }, [location]); // Se ejecutará cada vez que location cambie
 
     return (
         <WeatherContext.Provider
@@ -86,9 +74,7 @@ const WeatherProvider = ({ children }) => {
                 weatherData,
                 city,
                 getLocation,
-                kelvinToCelsius,
-                kelvinToFahrenheit,
-                searchLocation,
+                setLocation,
                 loading,
                 error,
             }}>

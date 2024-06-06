@@ -6,7 +6,7 @@ import { WeatherContext } from '../hooks/WeatherContext';
 function Modal() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [location, setLocation] = useState('');
-    const { fetchWeather, weatherData } = useContext(WeatherContext);
+    const { fetchWeather, weatherData } = useContext(WeatherContext); 
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
