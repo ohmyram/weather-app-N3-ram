@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GeoLoc } from './GeoLoc';
+import { GeoLocal } from './GeoLocal';
 
 function WeatherCard({ weatherData, toggleModal }) {
 
@@ -65,7 +65,7 @@ return () => clearInterval(interval);
                         Search for places
                     </button>
 
-                    <GeoLoc />
+                    <GeoLocal />
 
                 </div>
 
