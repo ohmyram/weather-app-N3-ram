@@ -4,14 +4,15 @@ import { WeekTime } from "./WeekTime";
 export const Time = () => {
     return (
         <>
-            <div 
-            className="w-full md:w-3/4 flex flex-col h-screen p-6 md:p-12 justify-around gap-6">
+            <div className='grow flex justify-center'>
+                <div className="w-full md:w-11/12 lg:3/4 flex flex-col p-6  justify-around gap-6 items-center">
 
-                <WeekTime />
-                <TempTime />
+                    <WeekTime />
+                    <TempTime />
 
+                </div>
             </div>
         </>
     )
-    
+
 };

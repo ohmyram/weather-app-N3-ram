@@ -9,7 +9,7 @@ const WeatherProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-
+    /* Obtiene los datos del clima por Latitud y longitud.*/
     const fetchWeather = async (lat, lon) => {
         setLoading(true);
         setError(null);
@@ -27,6 +27,7 @@ const WeatherProvider = ({ children }) => {
         }
     };
 
+    /*Obtiene los datos del clima por el nombre de la ciudad.*/
     const fetchWeatherByCity = async (cityName) => {
         setLoading(true);
         setError(null);
@@ -44,6 +45,7 @@ const WeatherProvider = ({ children }) => {
         }
     };
 
+    /* Obtiene los datos por el nombre de la ciudad .*/
     const fetchCityName = async (lat, lon) => {
         try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=4fb1791439bb5c0532cd93dd0cf907b2`);
@@ -73,17 +75,17 @@ const WeatherProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        getLocation(); 
-    }, []); 
+        getLocation();
+    }, []);
 
 
 
     useEffect(() => {
-        if (location) { 
+        if (location) {
             fetchWeather(location.lat, location.lon);
             fetchCityName(location.lat, location.lon);
         }
-    }, [location]); 
+    }, [location]);
 
     return (
         <WeatherContext.Provider
