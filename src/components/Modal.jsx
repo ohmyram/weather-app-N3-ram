@@ -6,35 +6,21 @@ import { WeatherContext } from '../hooks/WeatherContext';
 function Modal() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [location, setLocation] = useState('');
-    const { fetchWeather, weatherData } = useContext(WeatherContext); 
+    const { weatherData } = useContext(WeatherContext);
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
     };
 
-    const handleSearch = async () => {
-        if (location.trim()) {
-            await fetchWeather(location);
-            setIsModalOpen(false);
-        }
-    };
-
-    const handleQuickSearch = async (city) => {
-        await fetchWeather(city);
-        setIsModalOpen(false);
-    };
-
     return (
         <>
-            <div style={{ width: "459px" }} className="relative h-screen w-full bg-[#100E1D] text-white">
+            <div className="relative h-screen md:w-96 bg-[#100E1D] text-white">
                 <WeatherCard weatherData={weatherData} toggleModal={toggleModal} />
                 <SearchModal
                     isModalOpen={isModalOpen}
                     toggleModal={toggleModal}
                     location={location}
-                    setLocation={setLocation}
-                    handleSearch={handleSearch}
-                    handleQuickSearch={handleQuickSearch} />
+                    setLocation={setLocation} />
             </div>
         </>
     );

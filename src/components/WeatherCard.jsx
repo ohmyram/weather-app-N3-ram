@@ -81,7 +81,7 @@ return () => clearInterval(interval);
 
                 <div className="text-center mb-12">
                     <div className="text-[144px] font-light leading-none">
-                    {currentTemperature}<span className="text-5xl font-normal text-[#A09FB1] align-top ml-2">°C</span>
+                    {currentTemperature}<span className="text-5xl font-normal text-[#A09FB1] ml-2"  style={{ fontSize: '2rem', lineHeight: '1' }}>°C</span>
                     </div>
                     <div className="text-[#A09FB1] text-4xl mt-6">{currentWeatherDescription}</div>
                 </div>
